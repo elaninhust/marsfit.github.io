@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>智能时钟</title>
+	<style>
+		*{ margin:0; padding:0; list-style:none; }
+		body{ width:100%; height:100%; background:#1685a9; overflow:hidden;}
+		div{ width:300px; 
+			height:300px; 
+			background:url(img/biaopan.png);
+			background-size:cover;
+			margin:100px auto;
+			position:relative;
+			-webkit-filter:drop-shadow(0 0 15px #000);
+		}
+
+		span.center{ 
+			width:14px;
+			height:14px;
+			background:#fff;
+			position:absolute;
+			left:50%;
+			top:50%;
+			margin-left:-7px;	
+			margin-top:-7px;
+			border-radius:50%;
+			-webkit-filter:drop-shadow(0 0 1px #FFF);
+		}
+
+		span.hour{
+			width:8px;
+			height:60px;
+			background: #fff;
+			position:absolute;
+			left:50%;
+			bottom:50%;
+			margin-left:-4px;
+			margin-bottom:15px;
+			-webkit-filter:drop-shadow(0 0 1px #FFF);
+			transform-origin:4px 75px;
+		}
+
+		span.min{
+			width:6px;
+			height:80px;
+			background:#fff;
+			position:absolute;
+			left:50%;
+			bottom:50%;
+			margin-left:-3px;
+			margin-bottom:15px;
+			-webkit-filter:drop-shadow(0 0 1px #FFF);
+			transform-origin:3px 95px;
+		}
+
+		span.sec{
+			width:3px;
+			height:100px;
+			background:red;
+			position:absolute;
+			left:50%;
+			bottom:50%;
+			margin-left:-1.5px;
+			margin-bottom:15px;
+			-webkit-filter:drop-shadow(0 0 1px red);
+			transform-origin:1.5px 115px;
+		}
+
+		span.top{
+			width:4px;
+			height:20px;
+			background:#fff;
+			position:absolute;
+			left:50%;
+			margin-left:-2px;
+			top:0;
+			-webkit-filter:drop-shadow(0 0 1px #fff);
+		}
+		span.bottom{
+			width:4px;
+			height:20px;
+			background:#fff;
+			position:absolute;
+			left:50%;
+			margin-left:-2px;
+			bottom:0;
+			-webkit-filter:drop-shadow(0 0 1px #fff);
+		}
+
+		span.left{
+			width:20px;
+			height:4px;
+			background:#fff;
+			position:absolute;
+			left:0;
+			top:50%;
+			margin-top:-2px;
+			-webkit-filter:drop-shadow(0 0 1px #fff);
+		}
+
+		span.right{
+			width:20px;
+			height:4px;
+			background:#fff;
+			position:absolute;
+			right:0;
+			top:50%;
+			margin-top:-2px;
+			-webkit-filter:drop-shadow(0 0 1px #fff);
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var aSpan=document.querySelectorAll('span');
+
+			clock();
+
+			// setInterval(function(){
+			// 	clock();
+			// },30);
+
+			function clock(){
+				var oDate=new Date();
+				var oH=oDate.getHours();
+				var oM=oDate.getMinutes();
+				var oS=oDate.getSeconds();
+
+				aSpan[0].style.transform='rotate('+(oH%12+oM/60+oS/3600)*30+'deg)';
+				aSpan[1].style.transform='rotate('+(oM+oS/60)*6+'deg)';
+				aSpan[2].style.transform='rotate('+oS*6+'deg)'
+
+			}
+		};
+	</script>
+</head>
+<body>
+	<div>
+		<span class='hour'></span>
+		<span class='min'></span>
+		<span class='sec'></span>
+		<span class='center'></span>
+		<span class='top'></span>
+		<span class='right'></span>
+		<span class='bottom'></span>
+		<span class='left'></span>
+	</div>
+</body>
+</html>

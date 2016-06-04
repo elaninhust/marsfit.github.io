@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d颗粒</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			list-style:none;
+		}
+		body{ width:100%; height:100%; background:#bbcdc5; }
+		div{
+			width:600px;
+			height:600px; 
+			margin:10px auto;
+			background-size:cover;
+			position:relative;
+		}
+		ul{
+			position:absolute;
+			background-size:600px 600px;
+			transform-style:preserve-3d;
+			transform:perspective(800px) rotateY(0deg)
+		}
+		li{
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			background-size:600px 600px;
+		}
+		li.front{
+			z-index:2;
+			backface-visibility:hidden;
+		}
+		li.back{
+			z-index:1;
+			transform:scale(-1,1);
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oBox=document.querySelector('div');
+			var R=3;
+			var C=3;
+			var w=oBox.offsetWidth/C;
+			var h=oBox.offsetHeight/R;
+			var iNum=0;
+			var bReady=true;
+
+			for(var r=0;r<R;r++){
+				for(var c=0;c<C;c++){
+					var oUl=document.createElement('ul');
+
+					oUl.dataset.r=r;
+					oUl.dataset.c=c;
+					oUl.innerHTML='<li class="front"></li><li class="back"></li>';
+					oBox.appendChild(oUl);
+					oUl.style.width=w+'px';
+					oUl.style.height=h+'px';
+					oUl.style.left=c*w+'px';
+					oUl.style.top=r*h+'px';
+					oUl.children[0].style.backgroundPosition=-c*w+'px '+(-r*h)+'px';
+					oUl.children[0].style.backgroundImage='url(img1/1.jpg)';
+					oUl.children[1].style.backgroundPosition=-c*w+'px '+(-r*h)+'px';
+					oUl.children[1].style.backgroundImage='url(img1/2.jpg)';
+				}
+			}
+
+			var aUl=document.querySelectorAll('ul');
+			document.onclick=function(){
+				if(!bReady)return;
+				bReady=false;
+				iNum++;
+				for(var i=0;i<aUl.length;i++){
+					aUl[i].style.transition='1s all ease '+((+aUl[i].dataset.r)+(+aUl[i].dataset.c))*100+'ms';
+					aUl[i].style.transform='perspective(800px) rotateY(-540deg)';
+				}
+			};
+
+			aUl[aUl.length-1].addEventListener('transitionend',function(){
+				bReady=true;
+				for(var i=0;i<aUl.length;i++){
+					aUl[i].style.transition='none';
+					aUl[i].style.transform='perspective(800px) rotateY(0deg)';
+					aUl[i].children[0].style.backgroundImage='url(img1/'+(iNum%12+1)+'.jpg)';
+					aUl[i].children[1].style.backgroundImage='url(img1/'+((iNum+1)%12+1)+'.jpg)';
+				}
+			},false);
+
+		};
+	</script>
+</head>
+<body>
+<div></div>
+</body>
+</html>

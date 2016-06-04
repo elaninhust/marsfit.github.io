@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爆炸切换</title>
+	<style>
+		*{
+			margin:0;
+			padding:0; 
+			list-style:none;
+		}
+		body,html{
+			width:100%;
+			height:100%;
+			overflow:hidden;
+			background:#4a4266;
+		}
+		/*body:after{ content:''; width:100%; height:100%; position:absolute; top:0; left:0; background:url(img1/bg.jpg); -webkit-filter:blur(10px); background-size:cover; z-index:-1;}*/
+		div{
+			width:500px;
+			height:500px; 
+			margin:100px auto;
+			background:url(img1/1.JPG);
+			background-size:cover;
+			position:relative;
+			transition:1s all ease;
+		}
+		span{
+			position:absolute;
+			background-size:500px 500px;
+			opacity:1;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oDiv=document.querySelector('div');
+			var R=5;
+			var C=5;
+			var w=oDiv.offsetWidth/C;
+			var h=oDiv.offsetHeight/R;
+			var bReady=true;
+
+			for(var r=0;r<R;r++){
+				for(var c=0;c<C;c++){
+					var oSpan=document.createElement('span');
+
+					oDiv.appendChild(oSpan);
+					oSpan.style.width=w+'px';
+					oSpan.style.height=h+'px';
+					oSpan.style.left=c*w+'px';
+					oSpan.style.top=r*h+'px';
+					oSpan.style.backgroundImage='url(img1/1.jpg)';
+					oSpan.style.backgroundPosition=(-c*w)+'px '+(-r*h)+'px';
+				}
+			}
+
+			var aSpan=document.querySelectorAll('span');
+			var iNum=0;
+			document.onclick=function(){
+				if(!bReady)return;
+				bReady=false;
+				iNum++;
+				for(var i=0;i<aSpan.length;i++){
+					var x=aSpan[i].offsetLeft+w/2-oDiv.offsetWidth/2;
+					var y=aSpan[i].offsetTop+h/2-oDiv.offsetHeight/2;
+
+					aSpan[i].style.transition='1s all ease';
+					aSpan[i].style.opacity=0;
+					aSpan[i].style.transform='perspective(800px) translateX('+x+'px) translateY('+y+'px) rotateX('+rnd(-180,181)+'deg) rotateY('+rnd(-180,181)+'deg)';
+				}
+				oDiv.style.backgroundImage='url(img1/'+(iNum%12+1)+'.jpg)';
+			};
+
+			aSpan[0].addEventListener('transitionend',function(){
+				bReady=true;
+				for(var i=0;i<aSpan.length;i++){
+					aSpan[i].style.transition='none';
+					aSpan[i].style.opacity=1;
+					aSpan[i].style.transform='none';
+					aSpan[i].style.backgroundImage='url(img1/'+(iNum%12+1)+'.jpg)';
+				}
+			},false);
+		};
+		function rnd(n,m){
+			return parseInt(Math.random()*(m-n)+n);
+		}
+	</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>

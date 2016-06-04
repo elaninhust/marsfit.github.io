@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d正反切换</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			list-style:none;
+		}
+		body,html{
+			width:100%;
+			height:100%;
+			overflow:hidden;
+		}
+		body{ background:#3d3b4f; }
+		ul{
+			width:400px;
+			height:400px; 
+			margin:100px auto;
+			position:relative;
+			transform-style:preserve-3d;
+			transition:1s all ease;
+			transform:perspective(1200px) rotateY(0deg);
+		}
+		ul:active{
+			transform:perspective(1200px) rotateY(-540deg);
+		}
+		li{
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			font-size:100px; 
+			color:red;
+			text-align:center;
+			line-height:400px;
+			box-shadow:0 0 50px 0 #000;
+
+		}
+		li.front{
+			background:url(img1/1.JPG) no-repeat;
+			background-size:cover;
+			z-index:2;
+			backface-visibility:hidden;
+
+		}
+		li.back{
+			background:url(img1/3.JPG) no-repeat;
+			background-size:cover;
+			z-index:1;
+			transform:scale(-1,1);
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class='front'>正面</li>
+		<li class='back'>背面</li>
+	</ul>
+</body>
+</html>

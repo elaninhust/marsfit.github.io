@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width,user-scalable=no,initial-scale=1.0' />
+	<title>hexagone</title>
+	<style>
+		*{ margin:0; padding:0; list-style:none; }
+		header{ width:100%; height:0.6rem; display:-webkit-box;}
+		header a{ width:0.6rem; height:0.6rem; background:#344a61; display:-webkit-box; -webkit-box-align:center; -webkit-box-pack:center;}
+		header a.header_list{ border-right:1px solid #fff; }
+		header a.header_email {border-left:1px solid #fff; }
+		header a.header_list img{ width:0.14rem; height:0.1rem; vertical-align:top; display:block;}
+		header a.header_email img{ width:0.18rem; height:0.12rem; vertical-align:top; display:block;}
+		header div{ -webkit-box-flex:1; background:#344a61; font-size:0.15rem; text-align:center; line-height:0.6rem; color:#fff;}
+		#wrap{ padding:0 0.2rem; }
+		#wrap .homepage{ height:0.42rem; background:#fff; line-height:0.42rem; font-size:0.08rem; color:#c4c4c4; border-bottom:1px solid #c4c4c4;}
+		#wrap .wrap_list{ width:100%; border-bottom:1px solid #c4c4c4;}
+		#wrap .wrap_list img{ height:1.86rem; margin:0.2rem 0; vertical-align:top;}
+		#wrap .wrap_list h2{ height:0.1rem; font-size:0.1em; }
+		#wrap .wrap_list p{ color:#565656; font-size:0.07rem; margin:0.2rem 0; line-height:0.18rem;}
+		#wrap .content{ padding:0.2rem 0; }
+		#wrap .wrap_list div.use{margin-left:1rem; padding:0.05rem 0 0 0; width:0.8rem; }
+		#wrap .wrap_list div.use img{ width:0.8rem; height:0.8rem; margin:-0.05rem 0 0 -1rem; float:left;}
+		#wrap .wrap_list div.use h2{ height:0.1rem; font-size:0.1em;}
+		#wrap .wrap_list div.use p{ margin:0.05rem 0; }
+		#wrap .wrap_list ul.works{ overflow:hidden; height:1.8rem;}
+		#wrap .wrap_list ul.works li{ width:0.8rem; height:0.8rem; float:left; margin:0 0 0.2rem 0;}
+		#wrap .wrap_list ul.works li.middle{ margin:0 0.2rem; }
+		#wrap .wrap_list ul.works img{ width:0.8rem; height:0.8rem; margin:0;}
+		#wrap .wrap_list ul.facebook{ width:1.94rem; height:0.5rem; margin:0 auto;}
+		#wrap .wrap_list ul.facebook li{ width:0.5rem; height:0.5rem; float:left;}
+		#wrap .wrap_list ul.facebook li img{ width:0.5rem; height:0.5rem; margin:0; vertical-align: top}
+		#wrap footer.wrap_list{ text-align: center; }
+		#wrap footer.wrap_list p{ background:#fff;font-size:0.08rem; color:#c4c4c4;  margin:0;}
+		#skin{ width:100%; height:0.6rem; background:#000000; text-align: center; overflow: hidden;}
+		#skin ul{ display:-webkit-box; }
+		#skin li{height:0.4rem; box-sizing:border-box; -webkit-box-flex:1; padding:0.1rem;}
+		#skin img{ width:0.2rem; height:0.2rem; vertical-align:top;}
+		#skin p{ color:#616161;  font-size:0.075rem;}
+	</style>
+	<script>
+		device();
+		window.addEventListener('resize',device,false);
+		function device(){
+			document.documentElement.style.fontSize=100/320*document.documentElement.clientWidth+'px';
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<a href="javascript:;" class='header_list'>
+			<img src="img/list.png" alt="">
+		</a>
+		<div class='logo'>HEXAGONE</div>
+		<a href="javascript:;" class='header_email'>
+			<img src="img/email.png" alt="">
+		</a>
+	</header>
+	<div id="wrap">
+		<p class='homepage'>HOMEPAGE</p>
+		<li class="wrap_list">
+			<img src='img/welcome.png' alt="">
+			<h2>WELL,HELLO HERE!</h2>	
+			<p>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ.</p>
+		</li>
+		<li class="wrap_list content">
+			<div class='use'>
+				<img src="img/use1.png" alt="">
+				<h2>EASY TO USE!</h2>	
+				<p>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ. you can see it all on GitHub like a champ.</p>
+			</div>
+			<div class='use'>
+				<img src="img/use2.png" alt="">
+				<h2>EASY TO USE!</h2>	
+				<p>You know, rather than reading the source like a chump, you can see it all on GitHub like. you can see it all on GitHub like a champ.</p>
+			</div>
+		</li>
+		<li class="wrap_list content">
+			<h2>SOME OF OUR WORKS!</h2>	
+			<p>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ.</p>
+			<ul class='works'>
+				<li><img src="img/use1.png" alt=""></li>
+				<li class='middle'><img src="img/use1.png" alt=""></li>
+				<li><img src="img/use1.png" alt=""></li>
+				<li><img src="img/use1.png" alt=""></li>
+				<li class='middle'><img src="img/use1.png" alt=""></li>
+				<li><img src="img/use1.png" alt=""></li>
+
+			</ul>
+		</li>
+		<li class="wrap_list content">
+			<h2>TESTIMONIAL!</h2>	
+			<p>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ.</p>
+			<div class='use'>
+				<img src="img/use3.png" alt="">
+				<p style='margin-top:-0.01rem'>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ.you can see it all on GitHub like a champ.</p>
+			</div>
+		</li>
+		<li class="wrap_list content" style='text-align: center;'>
+			<h2>GET SOCIAL WITH US!</h2>	
+			<p>You know, rather than reading the source like a chump, you can see it all on GitHub like a champ.</p>
+			<ul class="facebook">
+				<li><img src="img/facebook.png" alt=""></li>
+				<li style='margin:0 0.22rem'><img src="img/facebook.png" alt=""></li>
+				<li><img src="img/facebook.png" alt=""></li>
+			</ul>
+		</li>
+		<footer class='wrap_list content'>
+			<p>COPYRIGHT 2013</p>
+			<p>ALL RIGHTS RESERVED</p>
+		</footer>
+	</div>
+	<div id="skin">
+		<ul>
+			<li><img src="img/skin1.png" alt=""></li>
+			<li><img src="img/skin2.png" alt=""></li>
+			<li><img src="img/skin3.png" alt=""></li>
+			<li><img src="img/skin4.png" alt=""></li>
+			<li><img src="img/skin5.png" alt=""></li>
+			<li><img src="img/skin6.png" alt=""></li>
+			<li><img src="img/skin7.png" alt=""></li>
+			<li><img src="img/skin8.png" alt=""></li>
+		</ul>
+		<p>TAP THE ICONS TO CHANGE THE MENU STYLE!</p>
+	</div>
+</body>
+</html>

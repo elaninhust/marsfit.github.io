@@ -1,22 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>旋转</title>
-	<style>
-		div{ transition:2s all ease; margin-top:100px; width:200px; height:200px; background:#ccc; margin-left:100px;}
-		div:hover{ animation:xz 2s ease; }
-		@keyframes xz{
-			from{
-				transform:rotate(0deg);
-			}
-			to{
-				transform:rotate(135deg);
-			}
-		}
-	</style>
+    <title> Ivan Tran</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="img/logo.jpg" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700' rel='stylesheet' type='text/css'>
+    <script src="js/jquery-1.7.2.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body>
-	<div></div>
+<div class="swiper-container">
+    <ul class="swiper-wrapper">
+        <!--第一屏-->
+        <li class="swiper-slide page_one">
+            <div id="page_one">
+            <div class="page_one_left">
+                <img src="img/face.JPG" alt="">
+            </div>
+            <div class="page_one_right">
+                <p class="name"><span>谭 帆</span></p>
+                <p class="work">前端工程师</p>
+                <p class="description">最近,我正在找前端方面的相关工作...</p>
+                <p class="description">平常时间我喜欢拍拍照片,逛逛微博,看看知乎,写写代码,刷刷SegmentFault...</p>
+            </div>
+            <div class="page_one_circular">
+                <svg viewBox='0 0 80 80'>
+                    <path d='M 0,40 a 40,40 0 1,1 0,1 z' id='circle' />
+                    <text>
+                        <textPath xlink:href='#circle'>BRIEF INTRODUCTION</textPath>
+                    </text>
+                </svg>
+            </div>
+            <!--<div class="page_one_word">-->
+                <!--<span>谭 帆</span>-->
+                <!--<span>前端</span>-->
+                <!--<span>工程师</span>-->
+            <!--</div>-->
+        </div>
+        </li>
+        <!--第二屏-->
+        <li class="swiper-slide page_two">
+            <ol id="page_two">
+                <div class="page_two_bg"></div>
+                <li><a href="javascript:;">爆炸切换</a></li>
+                <li><a href="javascript:;">3d环形</a></li>
+                <li><a href="javascript:;">3d颗粒</a></li>
+                <li><a href="javascript:;">数字时钟</a></li>
+                <li><a href="javascript:;">3d正反切换</a></li>
+                <li><a href="javascript:;">智能时钟</a></li>
+                <li><a href="javascript:;">AJAX微博留言</a></li>
+            </ol>
+        </li>
+        <!--第三屏-->
+        <li class="swiper-slide page_three page_three">
+            <ol id="page_three">
+                <li><img src="img/guokr0.png" alt=""><a href="example/guokr/guokr.html" target="_blank">果壳</a></li>
+                <li><img src="img/3600.png"  alt=""><a href="example/360kan/360kan.html" target="_blank">360影视</a></li>
+                <li><img src="img/xiaomi0.png" alt=""><a href="example/xiaomi/pages/xiaomi.html" target="_blank">小米</a></li>
+                <li><img src="img/aiqiyi0.png" alt=""><a href="example/aiqiyi/aiqiyi.html" target="_blank">爱奇艺</a></li>
+                <li><img src="img/hexagone0.png" alt=""><a href="example/hexagone/hexagone.html" target="_blank">HEXAGONE</a></li>
+            </ol>
+        </li>
+        <!--第四屏-->
+        <li class="swiper-slide page_four">
+            <canvas></canvas>
+            <div id="page_four">
+                <div><img src="img/logo.jpg" alt=""></div>
+                <h1>Ivan  Tran</h1>
+                <p><a href="javascript:;">13071237889</a></p>
+                <p><a href="javascript:;">ivaninhust@gmail.com</a></p>
+                <p><a href="https://segmentfault.com/u/neineina_" target="_blank">SegmentFault</a></p>
+                <p><a href="http://weibo.com/3041082751/profile?topnav=1&wvr=6&is_all=1" target="_blank">微博</a></p>
+                <p><a href="javascript:;">...</a></p>
+            </div>
+        </li>
+    </ul>
+    <!--导航分页器-->
+    <div class="swiper-pagination"></div>
+</div>
 </body>
 </html>

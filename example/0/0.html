@@ -1,0 +1,214 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AJAX微博留言</title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+<script src="ajax1.js"></script>
+<script src="cookie.js"></script>
+<script>
+    window.onload=function() {
+        var oT = document.getElementById('t1');
+        var oBtn = document.getElementById('btn1');
+        var oBox = document.getElementById('msg_box');
+        var oPagecon = document.getElementById('pagecon');
+        var url = 'weibo.php';
+        var iPagenow=1;
+
+        //<新建一个div>
+        function createMsg(t, content, acc, ref, id) {
+            var oDate = new Date();
+            oDate.setTime(t * 1000);
+            var str = oDate.getFullYear() + '-' + fnAdd((oDate.getMonth() + 1)) + '-' + fnAdd(oDate.getDate()) + ' ' + fnAdd(oDate.getHours()) + ':' + fnAdd(oDate.getMinutes()) + ':' + fnAdd(oDate.getSeconds());
+            var oDiv = document.createElement('div');
+            oDiv.className = 'reply';
+            oDiv.innerHTML = '<p class="replyContent">' + content + '</p>' +
+                    '<p class="operation">' +
+                    '<span class="replyTime">' + str + '</span>' +
+                    '<span class="handle">' +
+                    '<a href="javascript:;" class="top">'+acc+'</a>' +
+                    '<a href="javascript:;" class="down_icon">'+ref+'</a>' +
+                    '<a href="javascript:;" class="cut">删除</a>' +
+                    '</span>' +
+                    '</p>';
+
+            var oAcc=oDiv.getElementsByTagName('a')[0];
+            oAcc.onclick=function(){
+                if(getCookie('acc'+id)){
+                    alert('今天已经顶过了!');
+                }else{
+                    ajax(url,{
+                        act:'acc',
+                        id:id
+                    },function(str){
+                        var json=eval('('+str+')');
+                        if(json.error){
+                            alert('今天已经顶过了!');
+                        }else{
+                            oAcc.innerHTML=parseInt(oAcc.innerHTML)+1;
+                            setCookie('acc'+id,oAcc.innerHTML,1);
+                        }
+                    },function(){
+                        alert('数据连接错误!');
+                    });
+                }
+            };
+
+            var oRef=oDiv.getElementsByTagName('a')[1];
+            oRef.onclick=function(){
+                if(getCookie('ref'+id)){
+                    alert('今天已经踩过了!');
+                }else{
+                    ajax(url,{
+                        act:'ref',
+                        id:id
+                    },function(str){
+                        var json=eval('('+str+')');
+                        if(json.error){
+                            alert('今天已经踩过了!');
+                        }else{
+                            oRef.innerHTML=parseInt(oRef.innerHTML)+1;
+                            setCookie('ref'+id, oRef.innerHTML,1);
+                        }
+                    },function(){
+                        alert('数据连接错误!');
+                    });
+                }
+            };
+
+            var oA=oDiv.getElementsByTagName('a')[2];
+            oA.onclick=function(){
+                ajax(url,{
+                    act:'del',
+                    id:id
+                },function(str){
+                    var json=eval('('+str+')');
+                    if(json.error){
+                        alert('删除失败!');
+                    }else{
+                        oBox.removeChild(oDiv);
+                        getPage(iPagenow);
+                        Pagecount();
+                    }
+                },function(){
+                    alert('数据连接错误!');
+                });
+            };
+            return oDiv;
+        }
+
+        oBtn.onclick = function () {
+            if(!oT.value)return;
+            iPagenow=1;
+            getPage(1);
+            Pagecount();
+            ajax(url, {
+                act: 'add',
+                content: oT.value
+            }, function (str) {
+                var json = eval('(' + str + ')');
+                var oDiv = createMsg(json.time, oT.value, 0, 0, json.id);
+                if (oBox.children) {
+                    oBox.insertBefore(oDiv, oBox.children[0]);
+                } else {
+                    oBox.appendChild(oDiv);
+                }
+                oT.value='';
+                if(oBox.children.length==7){
+                    oBox.removeChild(oBox.children[6]);
+                }
+            }, function () {
+                alert('数据连接错误!');
+            });
+        };
+
+        Pagecount();
+        //<获取页数>
+        function Pagecount(){
+            oPagecon.innerHTML='';
+            ajax(url,{
+                act:'get_page_count'
+            },function(str){
+                var json=eval('('+str+')');
+                for(var i=0;i<json.count;i++){
+                    var oA=document.createElement('a');
+                    if(i==iPagenow-1){
+                        oA.className='active';
+                    }
+                    oA.innerHTML=i+1;
+                    oA.href='javascript:;';
+                    oPagecon.appendChild(oA);
+                    oA.onclick=function(){
+                        getPage(this.innerHTML);
+                        for(var i=0;i<json.count;i++){
+                            oPagecon.children[i].className='';
+                        }
+                        this.className='active';
+                        iPagenow=this.innerHTML;
+                    };
+                }
+            },function(){
+                alert('数据连接错误!');
+            });
+        }
+
+        getPage(1);
+        //<获取某一页数据>
+        function getPage(n){
+            oBox.innerHTML='';
+            ajax(url,{
+                act:'get',
+                page:n
+            },function(str){
+                var arr=eval(str);
+                for(var i=0;i<arr.length;i++){
+                    var oDiv=createMsg(arr[i].time,arr[i].content,arr[i].acc,arr[i].ref,arr[i].id);
+                    oBox.appendChild(oDiv);
+                }
+            },function(){
+                alert('数据连接错误!')
+            });
+        }
+    };
+
+
+    function fnAdd(n){
+        return n<10?'0'+n:''+n;
+    }
+</script>
+</head>
+
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="t1"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" id="btn1"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="msg_box">
+        	<!--<div class="reply">-->
+                <!--<p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>-->
+                <!--<p class="operation">-->
+                    <!--<span class="replyTime">2011-09-08 16:37:60</span>-->
+                    <!--<span class="handle">-->
+                    	<!--<a href="javascript:;" class="top">0</a>-->
+                        <!--<a href="javascript:;" class="down_icon">0</a>-->
+                        <!--<a href="javascript:;" class="cut">删除</a>-->
+                    <!--</span>-->
+                <!--</p>-->
+            <!--</div>-->
+        </div>
+        <div class="page" id="pagecon">
+        	<!--<a href="javascript:;" class="active">1</a>-->
+        	<!--<a href="javascript:;">2</a>-->
+        	<!--<a href="javascript:;">3</a>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
