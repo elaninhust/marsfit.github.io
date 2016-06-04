@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转</title>
+	<style>
+		div{ transition:2s all ease; margin-top:100px; width:200px; height:200px; background:#ccc; margin-left:100px;}
+		div:hover{ animation:xz 2s ease; }
+		@keyframes xz{
+			from{
+				transform:rotate(0deg);
+			}
+			to{
+				transform:rotate(135deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
